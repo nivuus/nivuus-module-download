@@ -1,0 +1,71 @@
+<!--
+Copyright 2019 Allanic.me ISC License License
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+Created by mallanic <maxime@allanic.me> at 18/08/2019
+-->
+
+<div class="form-group">
+    <label for="exampleFormControlFile1" ng-translate=".ADD"></label>
+    <input type="file"
+            class="btn btn-primary"
+            ng-model="file"
+            onchange="angular.element(this).scope().add(this.files)"
+            multiple>
+</div>
+
+<div class="card">
+    <table class="table table-hover dashboard-task-infos">
+        <thead>
+            <tr>
+                <th scope="col" ng-translate=".NAME"></th>
+                <th scope="col" ng-translate=".STATUS"></th>
+                <th scope="col" ng-translate=".SPEED"></th>
+                <th scope="col" ng-translate=".PROGRESS"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="download in downloads track by download.gid" ng-console="download">
+                <td ng-bind="download.bittorrent.info.name"></td>
+                <td ng-bind="download.status"></td>
+                <td>
+                    <span ng-if="download.downloadSpeed"
+                        ng-bind="download.downloadSpeed | humanize:'bytesPerSecond'" ></span>
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar"
+                            role="progressbar"
+                            ng-attr-aria-valuenow="{{ download.progress }}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            ng-style="{'width': download.progress + '%'}"
+                            ng-bind="download.progress.toFixed(2) + '%'"></div>
+                    </div>
+
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-more_vert"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <button class="dropdown-item"
+                                    ng-click="pause(download)"
+                                    ng-if="download.status !== 'paused'"
+                                    ng-translate=".PAUSE"></button>
+                            <button class="dropdown-item"
+                                    ng-click="play(download)"
+                                    ng-if="download.status !== 'active'"
+                                    ng-translate=".PLAY"></button>
+                            <button class="dropdown-item"
+                                    ng-click="remove(download)"
+                                    ng-translate=".REMOVE"></button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
