@@ -15,7 +15,7 @@ Created by mallanic <maxime@allanic.me> at 18/08/2019
 </div>
 
 <div class="card">
-    <table class="table table-hover dashboard-task-infos">
+    <table class="table table-hover table-borderless table-responsive dashboard-task-infos">
         <thead>
             <tr>
                 <th scope="col" ng-translate=".NAME"></th>
@@ -46,11 +46,11 @@ Created by mallanic <maxime@allanic.me> at 18/08/2019
 
                 </td>
                 <td>
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="dropdown" uib-dropdown dropdown-append-to-body>
+                        <button class="dropdown-toggle" id="navbarDropdown" uib-dropdown-toggle>
                             <i class="icon-more_vert"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        </button>
+                        <div class="dropdown-menu" uib-dropdown-menu>
                             <button class="dropdown-item"
                                     ng-click="pause(download)"
                                     ng-if="download.status !== 'paused'"

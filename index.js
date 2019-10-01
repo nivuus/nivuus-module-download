@@ -61,7 +61,8 @@ module.exports = {
                                 var directory = $path.dirname(outputFile);
                                 if (!$fs.existsSync(directory))
                                     $fs.mkdirSync(directory, {
-                                        recursive: true
+                                        recursive: true,
+                                        mode: 0o777
                                     });
                             }
                             // It's a Movie
@@ -78,8 +79,9 @@ module.exports = {
 
                             console.log(file.path, outputFile);
                             console.log("aria2 onDownloadComplete", guid);
-                            $fs.copyFile(file.path, outputFile, () => {});
-
+                            $fs.copyFile(file.path, outputFile, () => {
+                                $fs.chmod(outputFile, 0o777);
+                            });
                         });
                     }
 
